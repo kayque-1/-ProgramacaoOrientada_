@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class CalculadoraDesconto {
+    
+    public static void main (String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        
+        try{
+            //Coleta o valor do produto
+            System.out.print("Digite o preço do produto (%): ");
+             double valorProduto = Double.parseDouble(reader.readLine());
+            
+            //Percentual de desconto 
+            System.out.print("Digite o percentual de desconto (%): ");
+            double percentualDesconto = Double.parseDouble(reader.readLine());
+            
+            //Cauculo valor do percentualDesconto
+            double valorDesconto = valorProduto * percentualDesconto/ 100.0;
+            
+            //Calculo do valor final com desconto
+            double valorFinal = valorProduto - valorDesconto;
+            
+            //Exibir os resultados
+            System.out.printf("Valor do desconto: R$ %.2f%n",valorDesconto);
+            System.out.printf("valor com desconto: R$ %.2f%n",valorFinal);
+            
+        }catch(IOException e) {
+            System.out.println("Erro ao ler os dados:" + e.getMessage());
+        }catch(NumberFormatException e) {
+            System.out.println("por favor,digite apenas números validos.");
+        }
+    }
+}
