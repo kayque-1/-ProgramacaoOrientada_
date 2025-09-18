@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class CalculadoraVitorias {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Entrada de dados
+        System.out.print("Digite os pontos do líder: ");
+        int pontosLider = scanner.nextInt();
+
+        System.out.print("Digite os pontos do lanterna: ");
+        int pontosLanterna = scanner.nextInt();
+
+        // Cálculo da diferença de pontos
+        int diferenca = pontosLider - pontosLanterna;
+
+        if (diferenca <= 0) {
+            System.out.println("O lanterna já alcançou ou ultrapassou o líder!");
+        } else {
+            // Cada vitória vale 3 pontos
+            int vitoriasNecessarias = (int) Math.ceil(diferenca / 3.0);
+
+            System.out.println("Número de vitórias necessárias para alcançar ou ultrapassar o líder: " + vitoriasNecessarias);
+        }
+
+        scanner.close();
+    }
+}
