@@ -1,0 +1,78 @@
+-- INSERINDO DADOS INICIAIS
+-- ============================================
+
+-- -------------------------
+-- CIDADES
+-- -------------------------
+INSERT INTO Cidade (codcidade, cidade, uf) VALUES
+(1, 'Goiânia', 'GO'),
+(2, 'Anápolis', 'GO'),
+(3, 'São Paulo', 'SP'),
+(4, 'Rio de Janeiro', 'RJ');
+
+-- -------------------------
+-- FORNECEDORES
+-- -------------------------
+INSERT INTO Fornecedor (codfornecedor, codcidade, fornecedor, endereco, num, bairro, cep, contato, cnpj, insc, tel) VALUES
+(1, 1, 'Fornecedor Goiás LTDA', 'Rua A', 100, 'Centro', '74000-000', 'Carlos Silva', '12.345.678/0001-90', '123456', '(62)3333-4444'),
+(2, 3, 'Fornecedor Paulista SA', 'Av. Paulista', 2000, 'Bela Vista', '01310-100', 'Ana Souza', '98.765.432/0001-10', '654321', '(11)2222-3333');
+
+-- -------------------------
+-- CATEGORIAS
+-- -------------------------
+INSERT INTO Categoria (codcategoria, categoria) VALUES
+(1, 'Alimentos'),
+(2, 'Bebidas'),
+(3, 'Limpeza');
+
+-- -------------------------
+-- PRODUTOS
+-- -------------------------
+INSERT INTO Produto (codproduto, codcategoria, codfornecedor, descricao, peso, controlado, qtdem) VALUES
+(1, 1, 1, 'Arroz Tipo 1 - 5kg', 5.0, FALSE, 100),
+(2, 2, 2, 'Refrigerante Cola - 2L', 2.0, FALSE, 200),
+(3, 3, 1, 'Sabão em Pó - 1kg', 1.0, FALSE, 150);
+
+-- -------------------------
+-- TRANSPORTADORAS
+-- -------------------------
+INSERT INTO Transportadora (codtransportadora, codcidade, transportadora, endereco, num, bairro, cep, cnpj, insc, contato, tel) VALUES
+(1, 1, 'Transporte Goiás LTDA', 'Rua B', 50, 'Setor Oeste', '74010-010', '11.222.333/0001-44', 'T12345', 'Marcos Lima', '(62)9999-8888'),
+(2, 3, 'SP Transportes SA', 'Rua Augusta', 500, 'Centro', '01305-100', '22.333.444/0001-55', 'T54321', 'Fernanda Alves', '(11)98888-7777');
+
+-- -------------------------
+-- ENTRADAS
+-- -------------------------
+INSERT INTO Entrada (codentrada, codtransportadora, datapedi, dataent, total, frete, numnf, imposto) VALUES
+(1, 1, '2025-09-01', '2025-09-03', 1500.00, 100.00, 1234, 200.00),
+(2, 2, '2025-09-05', '2025-09-06', 800.00, 50.00, 1235, 120.00);
+
+-- -------------------------
+-- ITENS DE ENTRADA
+-- -------------------------
+INSERT INTO ItemEntrada (coditementrada, codproduto, codentrada, lote, qtde, valor) VALUES
+(1, 1, 1, 'L001', 50, 30.00),
+(2, 2, 1, 'L002', 100, 10.00),
+(3, 3, 2, 'L003', 80, 8.00);
+
+-- -------------------------
+-- LOJAS
+-- -------------------------
+INSERT INTO Loja (codloja, codcidade, nome, endereco, num, bairro, cep, insc, cnpj, tel) VALUES
+(1, 2, 'Supermercado Anápolis', 'Rua das Flores', 300, 'Centro', '75000-000', 'L1234', '33.444.555/0001-66', '(62)4444-5555'),
+(2, 4, 'Mercado Carioca', 'Av. Atlântica', 1500, 'Copacabana', '22000-000', 'L4321', '44.555.666/0001-77', '(21)3333-2222');
+
+-- -------------------------
+-- SAÍDAS
+-- -------------------------
+INSERT INTO Saida (codsaida, codloja, codtransportadora, total, frete, imposto) VALUES
+(1, 1, 1, 500.00, 50.00, 80.00),
+(2, 2, 2, 300.00, 30.00, 50.00);
+
+-- -------------------------
+-- ITENS DE SAÍDA
+-- -------------------------
+INSERT INTO ItemSaida (coditemsaida, codsaida, codproduto, lote, qtde, valor) VALUES
+(1, 1, 1, 'L001', 20, 35.00),
+(2, 1, 2, 'L002', 50, 12.00),
+(3, 2, 3, 'L003', 30, 9.00);
