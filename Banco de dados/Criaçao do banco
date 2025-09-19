@@ -1,0 +1,166 @@
+-- ============================================
+-- CRIAÇÃO DO BANCO DE DADOS
+-- ============================================
+CREATE DATABASE SistemaEstoque;
+USE SistemaEstoque;
+
+-- ============================================
+-- TABELA CIDADE
+-- ============================================
+CREATE TABLE Cidade (
+    codcidade      INT PRIMARY KEY,
+    cidade         VARCHAR(100) NOT NULL,
+    uf             CHAR(2) NOT NULL
+);
+
+-- ============================================
+-- TABELA FORNECEDOR
+-- ============================================
+CREATE TABLE Fornecedor (
+    codfornecedor  INT PRIMARY KEY,
+    codcidade      INT NOT NULL,
+    fornecedor     VARCHAR(100) NOT NULL,
+    endereco       VARCHAR(150),
+    num            INT,
+    bairro         VARCHAR(80),
+    cep            CHAR(9),
+    contato        VARCHAR(80),
+    cnpj           CHAR(18),
+    insc           VARCHAR(20),
+    tel            CHAR(14),
+
+    CONSTRAINT FK_Fornecedor_Cidade
+        FOREIGN KEY (codcidade) REFERENCES Cidade(codcidade)
+);
+
+-- ============================================
+-- TABELA CATEGORIA
+-- ============================================
+CREATE TABLE Categoria (
+    codcategoria   INT PRIMARY KEY,
+    categoria      VARCHAR(80) NOT NULL
+);
+
+-- ============================================
+-- TABELA PRODUTO
+-- ============================================
+CREATE TABLE Produto (
+    codproduto     INT PRIMARY KEY,
+    codcategoria   INT NOT NULL,
+    codfornecedor  INT NOT NULL,
+    descricao      VARCHAR(150) NOT NULL,
+    peso           DOUBLE,
+    controlado     BOOLEAN,
+    qtdem          INT,
+
+    CONSTRAINT FK_Produto_Categoria
+        FOREIGN KEY (codcategoria) REFERENCES Categoria(codcategoria),
+    CONSTRAINT FK_Produto_Fornecedor
+        FOREIGN KEY (codfornecedor) REFERENCES Fornecedor(codfornecedor)
+);
+
+-- ============================================
+-- TABELA TRANSPORTADORA
+-- ============================================
+CREATE TABLE Transportadora (
+    codtransportadora INT PRIMARY KEY,
+    codcidade         INT NOT NULL,
+    transportadora    VARCHAR(100) NOT NULL,
+    endereco          VARCHAR(150),
+    num               INT,
+    bairro            VARCHAR(80),
+    cep               CHAR(9),
+    cnpj              CHAR(18),
+    insc              VARCHAR(20),
+    contato           VARCHAR(80),
+    tel               CHAR(14),
+
+    CONSTRAINT FK_Transportadora_Cidade
+        FOREIGN KEY (codcidade) REFERENCES Cidade(codcidade)
+);
+
+-- ============================================
+-- TABELA ENTRADA
+-- ============================================
+CREATE TABLE Entrada (
+    codentrada        INT PRIMARY KEY,
+    codtransportadora INT NOT NULL,
+    datapedi          DATE,
+    dataent           DATE,
+    total             DOUBLE,
+    frete             DOUBLE,
+    numnf             INT,
+    imposto           DOUBLE,
+
+    CONSTRAINT FK_Entrada_Transportadora
+        FOREIGN KEY (codtransportadora) REFERENCES Transportadora(codtransportadora)
+);
+
+-- ============================================
+-- TABELA ITEMENTRADA
+-- ============================================
+CREATE TABLE ItemEntrada (
+    coditementrada INT PRIMARY KEY,
+    codproduto     INT NOT NULL,
+    codentrada     INT NOT NULL,
+    lote           VARCHAR(50),
+    qtde           INT,
+    valor          DOUBLE,
+
+    CONSTRAINT FK_ItemEntrada_Produto
+        FOREIGN KEY (codproduto) REFERENCES Produto(codproduto),
+    CONSTRAINT FK_ItemEntrada_Entrada
+        FOREIGN KEY (codentrada) REFERENCES Entrada(codentrada)
+);
+
+-- ============================================
+-- TABELA LOJA
+-- ============================================
+CREATE TABLE Loja (
+    codloja      INT PRIMARY KEY,
+    codcidade    INT NOT NULL,
+    nome         VARCHAR(100) NOT NULL,
+    endereco     VARCHAR(150),
+    num          INT,
+    bairro       VARCHAR(80),
+    cep          CHAR(9),
+    insc         VARCHAR(20),
+    cnpj         CHAR(18),
+    tel          CHAR(14),
+
+    CONSTRAINT FK_Loja_Cidade
+        FOREIGN KEY (codcidade) REFERENCES Cidade(codcidade)
+);
+
+-- ============================================
+-- TABELA SAÍDA
+-- ============================================
+CREATE TABLE Saida (
+    codsaida        INT PRIMARY KEY,
+    codloja         INT NOT NULL,
+    codtransportadora INT NOT NULL,
+    total           DOUBLE,
+    frete           DOUBLE,
+    imposto         DOUBLE,
+
+    CONSTRAINT FK_Saida_Loja
+        FOREIGN KEY (codloja) REFERENCES Loja(codloja),
+    CONSTRAINT FK_Saida_Transportadora
+        FOREIGN KEY (codtransportadora) REFERENCES Transportadora(codtransportadora)
+);
+
+-- ============================================
+-- TABELA ITEMSAIDA
+-- ============================================
+CREATE TABLE ItemSaida (
+    coditemsaida  INT PRIMARY KEY,
+    codsaida      INT NOT NULL,
+    codproduto    INT NOT NULL,
+    lote          VARCHAR(50),
+    qtde          INT,
+    valor         DOUBLE,
+
+    CONSTRAINT FK_ItemSaida_Produto
+        FOREIGN KEY (codproduto) REFERENCES Produto(codproduto),
+    CONSTRAINT FK_ItemSaida_Saida
+        FOREIGN KEY (codsaida) REFERENCES Saida(codsaida)
