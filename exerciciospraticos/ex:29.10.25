@@ -11,23 +11,173 @@ R:public class main {
 🧮 2. Soma de Dois Números
 Leia dois números inteiros e exiba a soma deles.
 
+R:import java.util.Scanner;
+
+public class Soma {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite o primeiro número: ");
+        int numero1 = input.nextInt();
+
+        System.out.print("Digite o segundo número: ");
+        int numero2 = input.nextInt();
+
+        int soma = numero1 + numero2;
+
+       
+        System.out.println("A soma é: " + soma);
+
+    }
+}
+
 🔢 3. Média de Três Números
 Leia três números e calcule a média aritmética simples.
+
+R:import java.util.Scanner;
+
+public class Mediaritmetica {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite o primeiro número: ");
+        int numero1 = input.nextInt();
+
+        System.out.print("Digite o segundo número: ");
+        int numero2 = input.nextInt();
+        
+        System.out.print("Digite o terceiro número: ");
+        int numero3 = input.nextInt();
+
+        int media = (numero1 + numero2 + numero3)/3;
+        
+       
+        System.out.println("A media é: " + media);
+
+    }
+}
 
 💬 4. Entrada e Saída de Nome
 Peça ao usuário que digite seu nome e exiba:
 
+R:import java.util.Scanner;
+
+public class Nome {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite o seu nome:");
+        String nome = input.nextLine();
+
+        
+        
+       
+        System.out.print("Seu nome é: " + nome);
+
+    }
+}
+
 🧓 5. Cálculo da Idade
 Peça o ano de nascimento e o ano atual e exiba a idade da pessoa.
+
+R:import java.util.Scanner;
+
+public class Idade {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite o ano do seu nascimento:");
+        int ano1= input.nextInt();
+        
+        System.out.print("Digite o ano atual:");
+        int ano2 = input.nextInt();
+        
+        int idade = ano2-ano1; 
+
+        
+       
+        System.out.print("Sua idade é: " + idade);
+
+    }
+}
 
 💰 6. Conversão de Dólares
 Peça o valor em reais e a cotação do dólar e exiba o valor convertido.
 
+R:import java.util.Scanner;
+
+public class Conversao {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite o valor em reais:");
+        double valorR= input.nextDouble();
+        
+        System.out.print("Digite a cotação do dólar:");
+        double cotacao = input.nextDouble();
+        
+        double conversao = valorR/cotacao; 
+
+        
+       
+        System.out.print("O valor em dólares é:US$ " + conversao);
+
+    }
+}
+
 📏 7. Área do Retângulo
 Leia a base e a altura de um retângulo e calcule sua área.
 
+R:import java.util.Scanner;
+
+public class Areatriangulo {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite a base do triângulo:");
+        double base= input.nextDouble();
+        
+        System.out.print("Digite a altura do triângulo:");
+        double altura = input.nextDouble();
+        
+        double area = (base*altura)/2; 
+
+        
+       
+        System.out.print("A área do triângulo é " + area);
+
+    }
+}
+
+
 ⏱️ 8. Conversão de Minutos
 Leia um valor em minutos e converta para horas e minutos.
+
+R:import java.util.Scanner;
+
+public class Horasminutos {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        
+        System.out.print("Digite os minutos:");
+        int minuto= input.nextInt();
+        int hora = minuto/60; 
+        int segundo =minuto*60;
+
+        
+       
+        System.out.println("Hora:" + hora);
+        System.out.println("Minutos:" + minuto);
+        System.out.println("Segundos:" + segundo);
+    }
+}
 
 🧮 9. Par ou Ímpar
 Leia um número inteiro e informe se ele é par ou ímpar.
