@@ -1,0 +1,263 @@
+## ☕ 5 Desafios Simples de Java para Iniciantes
+
+Estes desafios exigem o uso combinado de entrada de usuário (`Scanner`), laços de repetição (`for` ou `while`) e estruturas condicionais (`if/else`).
+
+
+
+| **1** | **Contador de Caracteres** |
+| **2** | **Sequência de Fibonacci** | 
+| **3** | **Validação de Senha** |
+| **4** | **Reversão de Array** | 
+| **5** | **Verificador de Primo** | 
+
+RESPOSTAS:
+1-----------------------------------------------------------------------------------------------------------------------------------------
+import java.util.Scanner;
+
+/**
+ 
+ * @author
+ * @version 1.0
+ */
+public class ContadorDeLetraA {
+
+    /**
+     *
+     * 
+     * @param args argumentos da linha de comando (não utilizados)
+     */
+    public static void main(String[] args) {
+    
+        Scanner entrada = new Scanner(System.in);
+
+     
+        System.out.print("Digite uma frase: ");
+
+        String frase = entrada.nextLine();
+
+     
+        int contador = 0;
+
+   
+        for (int i = 0; i < frase.length(); i++) {
+           
+            char c = frase.charAt(i);
+
+            if (c == 'a' || c == 'A') {
+                // Incrementa o contador em 1
+                contador++;
+            }
+        }
+
+        System.out.println("A letra 'a' aparece " + contador + " vezes na frase.");
+
+        entrada.close();
+    }
+}
+
+2-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+        entrada.close();
+    }import java.util.Scanner;
+
+/**
+ * Programa que gera e exibe os primeiros N números da sequência de Fibonacci.
+ * 
+ * Exemplo: se N = 6 → saída: 1, 1, 2, 3, 5, 8
+ * 
+ * A sequência de Fibonacci é formada pela soma dos dois números anteriores.
+ * (1, 1, 2, 3, 5, 8, 13, 21, ...)
+ * 
+ * @author
+ * @version 1.0
+ */
+public class SequenciaFibonacci {
+
+    /**
+     * Método principal. Lê o valor de N e exibe os primeiros N números da sequência de Fibonacci.
+     * 
+     * @param args argumentos da linha de comando (não utilizados)
+     */
+    public static void main(String[] args) {
+       
+        Scanner entrada = new Scanner(System.in);
+
+        
+        System.out.print("Digite um número inteiro N: ");
+        int n = entrada.nextInt(); // Lê o número informado e armazena em 'n'
+
+        
+        int primeiro = 1; // Primeiro termo da sequência
+        int segundo = 1;  // Segundo termo da sequência
+
+    
+        System.out.println("Sequência de Fibonacci com " + n + " números:");
+
+  
+        if (n == 1) {
+   
+            System.out.println(primeiro);
+        } 
+        
+        else if (n >= 2) {
+            
+            System.out.print(primeiro + ", " + segundo);
+
+           
+            for (int i = 3; i <= n; i++) {
+              
+                int proximo = primeiro + segundo;
+
+            
+                System.out.print(", " + proximo);
+
+
+                primeiro = segundo;
+                segundo = proximo;
+            }
+
+          
+            System.out.println();
+        } 
+       
+        else {
+            System.out.println("Por favor, digite um número maior que zero.");
+        }
+}
+3-----------------------------------------------------------------------------------------------------------------------------------------
+import java.util.Scanner;
+
+
+public class VerificacaoSenha {
+    
+    public static void main(String[] args) {
+        
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.print("Defina uma senha: ");
+        String senhaDefinida = entrada.nextLine();
+
+        String tentativa;
+
+        int tentativasRestantes = 3;
+
+        while (tentativasRestantes > 0) {
+
+            System.out.print("Digite a senha para confirmar: ");
+            tentativa = entrada.nextLine(); 
+
+            if (tentativa.equals(senhaDefinida)) {
+
+                System.out.println("Acesso concedido.");
+                break; 
+            } else {
+            
+                tentativasRestantes--;
+
+                if (tentativasRestantes > 0) {
+                    
+                    System.out.println("Senha incorreta. Tente novamente.");
+                    System.out.println("Tentativas restantes: " + tentativasRestantes);
+                } else {
+                  
+                    System.out.println("Acesso bloqueado. Número máximo de tentativas excedido.");
+                }
+            }
+        }
+
+        entrada.close();
+    }
+}
+4-----------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+
+public class ArrayOrdemInversa {
+
+   
+    public static void main(String[] args) {
+       
+        Scanner entrada = new Scanner(System.in);
+      
+        int[] numeros = new int[5];
+
+        System.out.println("Digite 5 números inteiros:");
+
+        for (int i = 0; i < numeros.length; i++) {
+          
+            System.out.print("Número " + (i + 1) + ": ");
+           
+            numeros[i] = entrada.nextInt();
+        }
+
+        System.out.println();
+
+        System.out.println("Números na ordem original:");
+        for (int i = 0; i < numeros.length; i++) {
+
+            System.out.print(numeros[i] + " ");
+        }
+
+       
+        System.out.println("\n");
+
+       
+        System.out.println("Números na ordem inversa:");
+      
+        for (int i = numeros.length - 1; i >= 0; i--) {
+          
+            System.out.print(numeros[i] + " ");
+        }
+
+       
+        System.out.println();
+
+      
+        entrada.close();
+    }
+}
+5-------------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+
+public class VerificaPrimo {
+
+   
+    public static void main(String[] args) {
+    
+        Scanner entrada = new Scanner(System.in);
+
+  
+        System.out.print("Digite um número inteiro: ");
+        int numero = entrada.nextInt(); 
+
+       
+        boolean ehPrimo = true;
+
+        if (numero <= 1) {
+            ehPrimo = false;
+        } else {
+
+            for (int i = 2; i <= numero / 2; i++) {
+              
+                if (numero % i == 0) {
+                    ehPrimo = false;
+                    break; 
+                }
+            }
+        }
+
+   
+        if (ehPrimo) {
+            System.out.println("É primo");
+        } else {
+            System.out.println("Não é primo");
+        }
+
+   
+        entrada.close();
+    }
+}
