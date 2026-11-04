@@ -1,0 +1,106 @@
+Atividade – Grafos I: Representação
+(a) Desenhe o grafo G2.
+
+
+
+
+
+
+
+yuminlee2.medium.com
+
+
+(b) Monte, à mão, a matriz e as listas de adjacência.
+
+Matriz de adjacência:
+	0	1	2	3	4	5
+0	0	1	0	0	1	0
+1	1	0	1	0	1	0
+2	0	1	0	1	0	0
+3	0	0	1	0	1	1
+4	1	1	0	1	0	0
+5	0	0	0	1	0	0
+
+Lista de adjacência:
+- 0: 1, 4
+- 1: 0, 2, 4
+- 2: 1, 3
+- 3: 2, 4, 5
+- 4: 0, 1, 3
+- 5: 3
+(c) Implemente as duas representações em Java e confira a saída com o item (b).
+
+GrafoMatriz.java
+public class GrafoMatriz {
+    private int[][] adj;
+    private int n;
+
+    public GrafoMatriz(int n) {
+        this.n = n;
+        adj = new int[n][n];
+    }
+
+    public void adicionarAresta(int u, int v) {
+        adj[u][v] = 1;
+        adj[v][u] = 1;
+    }
+
+    public boolean saoVizinhos(int u, int v) {
+        return adj[u][v] == 1;
+    }
+
+    public int grau(int u) {
+        int g = 0;
+        for (int v = 0; v < n; v++) {
+            g += adj[u][v];
+        }
+        return g;
+    }
+}
+
+
+GrafoLista.java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GrafoLista {
+    private List<List<Integer>> adj;
+
+    public GrafoLista(int n) {
+        adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+    }
+
+    public void adicionarAresta(int u, int v) {
+        adj.get(u).add(v);
+        adj.get(v).add(u);
+    }
+
+    public boolean saoVizinhos(int u, int v) {
+        return adj.get(u).contains(v);
+    }
+
+    public int grau(int u) {
+        return adj.get(u).size();
+    }
+}
+
+
+(d) Responda:
+
+1. Qual é o grau de cada vértice?
+- Vértice 0: grau 2.
+- Vértice 1: grau 3.
+- Vértice 2: grau 2.
+- Vértice 3: grau 3.
+- Vértice 4: grau 3.
+- Vértice 5: grau 1.
+2. Dê um exemplo de ciclo.
+
+0–1–4–0.
+
+3. Qual é o menor caminho de 0 até 5?
+
+0–4–3–5, com 3 arestas.
